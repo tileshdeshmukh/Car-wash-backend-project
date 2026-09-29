@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,7 @@ public class AppointmentController {
 	public ResponseEntity<List<Appointment>> getAllByUserId(@PathVariable Long id ) {	
 		try {
             log.info("Executing controller: {} getAllByUserId ID {}", getClass().getSimpleName(), id);
+            
             List<Appointment> appointmentsData = appointmentService.getAppointmentsByUserId(id);
             
             if(appointmentsData.isEmpty()) {
@@ -68,6 +70,7 @@ public class AppointmentController {
 	public ResponseEntity<Appointment> add(@RequestBody Appointment data) { 
 	    try {
 	        log.info("Executing controller: {}", getClass().getSimpleName());
+	        log.info("Received appointment: {}", data);
 	        data.setCreatedAt(LocalDateTime.now());
 	        // Status like "Confirmed" (initial state) || "Washing" : (working state) || "Ready" : (Washing completed) || Delivered : (Dispatched to User) 
 	        data.setWashStatus("Confirmed");
@@ -98,5 +101,29 @@ public class AppointmentController {
 		}
 	}
 	
+	@PutMapping("/cancelAppointment/{id}")
+	public ResponseEntity<Appointment> cancelAppointment(@PathVariable Long id) {
+		try {
+
+		    Appointment appointment = appointmentService.getAppointmentByUserId(id);
+		    
+		    System.out.println("get appointment data base on is :"+ appointment);
+		    
+		    if (appointment == null) {
+		        return ResponseEntity.notFound().build();
+		    }
+	
+		    appointment.setWashStatus("Cancelled");
+	
+		    Appointment updated = appointmentService.addAppointments(appointment);
+	
+		    return ResponseEntity.ok(updated);
+		    
+		}catch (Exception e) {
+			
+			log.error("Error in controller: {} - {}", getClass().getSimpleName(), e.getMessage(), e);
+		    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
 	
 }

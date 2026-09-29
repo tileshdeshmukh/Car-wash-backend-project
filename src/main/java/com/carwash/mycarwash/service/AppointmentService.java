@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.carwash.mycarwash.controller.AppointmentController;
 import com.carwash.mycarwash.model.Appointment;
 import com.carwash.mycarwash.repository.AppointmentRepository;
@@ -32,10 +30,9 @@ public class AppointmentService {
 
 		log.info("Executing Service: {}", getClass().getSimpleName());
 		Appointment responsData = appointmentRepository.save(data);
-	
+
 	    return responsData;
-		
-		
+
 	}
 	
 	public Appointment deleteApoointmentById(long id) {
@@ -53,6 +50,15 @@ public class AppointmentService {
 		List<Appointment> responseData = appointmentRepository.findByUseridOrderByUpdatedAtDesc(uid);
 	
 		return responseData;
+	}
+	
+	public Appointment getAppointmentByUserId(Long id) {
+		log.info("Executing Service: {}", getClass().getSimpleName());
+		
+		Appointment appointment = appointmentRepository.findById(id)
+	            .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Appointment not found with id: " + id));
+	            
+	    return appointment;
 	}
 
 }

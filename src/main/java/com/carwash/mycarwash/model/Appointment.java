@@ -21,7 +21,7 @@ public class Appointment {
 	private Long id;
 	
 	@Column(name = "user_id")
-	private int userid;
+	private Long userid;
 	
 	@Column(name = "name")
 	private String name;
@@ -44,8 +44,8 @@ public class Appointment {
 	@Column(name = "vehicle_number")
 	private String vehicleNumber;
 	
-	@Column(name = "plan")
-	private String plan; 
+	@Column(name = "plan_id")
+	private Long planid; 
 	
 	@Column(name = "price")
 	private Long price;
@@ -88,11 +88,11 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public int getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 	
@@ -152,12 +152,12 @@ public class Appointment {
 		this.vehicleNumber = vehicleNumber;
 	}
 
-	public String getPlan() {
-		return plan;
+	public Long getPlan() {
+		return planid;
 	}
 
-	public void setPlan(String plan) {
-		this.plan = plan;
+	public void setPlan(Long planid) {
+		this.planid = planid;
 	}
 	
 	public Long getPrice() {
@@ -201,9 +201,24 @@ public class Appointment {
 		this.createdAt = createdAt;
 	}
 
-	public Appointment(Long id, int userid, String name, Long mobileNumber, String vehicleType, String vehicleBrand,
-			String vehicleModel, String vehicleColor, String vehicleNumber, String plan, Long price, String washStatus,
-			LocalDate date, LocalDateTime updatedAt, LocalDateTime createdAt) {
+	public Appointment(
+			
+		    Long id,
+		    Long userid,
+		    String name,
+		    Long mobileNumber,
+		    String vehicleType,
+		    String vehicleBrand,
+		    String vehicleModel,
+		    String vehicleColor,
+		    String vehicleNumber,
+		    Long planid,
+		    Long price,
+		    String washStatus,
+		    LocalDate date,
+		    LocalDateTime updatedAt,
+		    LocalDateTime createdAt) {
+		
 		super();
 		this.id = id;
 		this.userid = userid;
@@ -214,7 +229,7 @@ public class Appointment {
 		this.vehicleModel = vehicleModel;
 		this.vehicleColor = vehicleColor;
 		this.vehicleNumber = vehicleNumber;
-		this.plan = plan;
+		this.planid = planid;
 		this.price = price;
 		this.washStatus = washStatus;
 		this.date = date;
@@ -231,7 +246,7 @@ public class Appointment {
 	public String toString() {
 		return "Appointment [id=" + id + ", userid=" + userid + ", name="+ name +", mobileNumber="+ mobileNumber +", vehicleType=" + vehicleType + ", vehicleBrand="
 				+ vehicleBrand + ", vehicleModel=" + vehicleModel + ", vehicleColor=" + vehicleColor
-				+ ", vehicleNumber=" + vehicleNumber + ", plan=" + plan + ", price="+ price +", washStatus="+ washStatus +", date=" + date + ", updatedAt=" + updatedAt + ", createdAt=" + createdAt
+				+ ", vehicleNumber=" + vehicleNumber + ", plan=" + planid + ", price="+ price +", washStatus="+ washStatus +", date=" + date + ", updatedAt=" + updatedAt + ", createdAt=" + createdAt
 				+ "]";
 	}
 	

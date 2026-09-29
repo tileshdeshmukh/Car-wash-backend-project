@@ -10,5 +10,4 @@ public class MycarwashApplication {
 		SpringApplication.run(MycarwashApplication.class, args);
 		System.out.println(" MyCarWash Application as been started....");
 	}
-
 }

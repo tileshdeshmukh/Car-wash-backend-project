@@ -17,6 +17,13 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+    
+    private String name;
+	private String mobile;
+    private String membership = "Gold Member";
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public Long getId() {
 		return id;
@@ -74,7 +81,7 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
-	private String name;
+	
     @Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", mobile="
@@ -97,10 +104,5 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	private String mobile;
-    private String membership = "Gold Member";
-
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+	
 }

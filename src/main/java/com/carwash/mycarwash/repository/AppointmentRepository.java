@@ -11,5 +11,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 	
 	 List<Appointment> findByUseridOrderByUpdatedAtDesc(Long uid);
 	 
+	 List<Appointment> findByEmailOrderByUpdatedAtDesc(String email);
+	 
 
 }

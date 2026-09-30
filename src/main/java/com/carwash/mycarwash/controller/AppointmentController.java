@@ -66,6 +66,27 @@ public class AppointmentController {
 
 	}
 	
+	@GetMapping("/getAllAppointmentByEmail/{email}")
+	public ResponseEntity<List<Appointment>> getAllByUserId(@PathVariable String email ) {	
+		try {
+            log.info("Executing controller: {} getAllByEmail ID {}", getClass().getSimpleName(), email);
+            
+            List<Appointment> appointmentsData = appointmentService.getAppointmentsByEmail(email);
+            
+            if(appointmentsData.isEmpty()) {
+            	return ResponseEntity.noContent().build();
+            }
+            
+            return ResponseEntity.ok(appointmentsData);
+            
+        } catch (Exception e) {
+            log.error("Error in controller: {} - {}", getClass().getSimpleName(), e.getMessage(), e);
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+	}
+	
 	@PostMapping("/addAppointment")
 	public ResponseEntity<Appointment> add(@RequestBody Appointment data) { 
 	    try {

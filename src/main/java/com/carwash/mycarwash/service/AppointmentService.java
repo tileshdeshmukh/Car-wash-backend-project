@@ -52,6 +52,13 @@ public class AppointmentService {
 		return responseData;
 	}
 	
+	public List<Appointment> getAppointmentsByEmail(String email) {
+		// TODO Auto-generated method stub
+		List<Appointment> responseData = appointmentRepository.findByEmailOrderByUpdatedAtDesc(email);
+		
+		return responseData;
+	}
+	
 	public Appointment getAppointmentByUserId(Long id) {
 		log.info("Executing Service: {}", getClass().getSimpleName());
 		

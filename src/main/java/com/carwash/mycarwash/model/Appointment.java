@@ -29,6 +29,9 @@ public class Appointment {
 	@Column(name = "mobile_number")
 	private Long mobileNumber;
 	
+	@Column(name= "email")
+	private String email;
+	
 	@Column(name = "vehicle_type")
 	private String vehicleType;
 	
@@ -98,6 +101,14 @@ public class Appointment {
 	
 	public String getName() {
 		return name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 	public void setName(String name) {
@@ -201,11 +212,11 @@ public class Appointment {
 		this.createdAt = createdAt;
 	}
 
-	public Appointment(
-			
+	public Appointment(		
 		    Long id,
 		    Long userid,
 		    String name,
+		    String email,
 		    Long mobileNumber,
 		    String vehicleType,
 		    String vehicleBrand,
@@ -223,6 +234,7 @@ public class Appointment {
 		this.id = id;
 		this.userid = userid;
 		this.name = name;
+		this.email = email;
 		this.mobileNumber = mobileNumber;
 		this.vehicleType = vehicleType;
 		this.vehicleBrand = vehicleBrand;
@@ -244,7 +256,7 @@ public class Appointment {
 
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", userid=" + userid + ", name="+ name +", mobileNumber="+ mobileNumber +", vehicleType=" + vehicleType + ", vehicleBrand="
+		return "Appointment [id=" + id + ", userid=" + userid + ", name="+ name +", email="+ email +", mobileNumber="+ mobileNumber +", vehicleType=" + vehicleType + ", vehicleBrand="
 				+ vehicleBrand + ", vehicleModel=" + vehicleModel + ", vehicleColor=" + vehicleColor
 				+ ", vehicleNumber=" + vehicleNumber + ", plan=" + planid + ", price="+ price +", washStatus="+ washStatus +", date=" + date + ", updatedAt=" + updatedAt + ", createdAt=" + createdAt
 				+ "]";
